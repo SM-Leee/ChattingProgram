@@ -40,9 +40,9 @@ public class chatServer implements ActionListener{
 	chatServer(){
 		clients = Collections.synchronizedMap(new HashMap<String, DataOutputStream>());
 		frame = new Frame("Server");
-		label = new Label("서버를 연결해 주세요");
-		btnServerOpen = new Button("연결");
-		btnServerClose = new Button("종료");
+		label = new Label("Server Center");
+		btnServerOpen = new Button("Open");
+		btnServerClose = new Button("Close");
 		textArea = new TextArea(15,40);
 		panel = new Panel();
 
@@ -70,12 +70,12 @@ public class chatServer implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj == btnServerOpen) {
-			System.out.println("시작");
+			System.out.println("Server Open");
 			start();
 
 		}
 		else if(obj == btnServerClose) {
-			System.out.println("종료");
+			System.out.println("Server Close");
 			System.exit(0);
 		}
 	}
@@ -84,7 +84,7 @@ public class chatServer implements ActionListener{
 		
 		try {
 			serverSocket = new ServerSocket(PORT);
-			textArea.append("서버가 시작되었습니다.\n");
+			textArea.append("Server Open\n");
 			Thread startThread = new StartThread();
 			startThread.start();	
 
@@ -122,7 +122,7 @@ public class chatServer implements ActionListener{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				textArea.append("[ "+socket.getInetAddress()+" : "+socket.getPort()+" ] "+"에서 접속하셨습니다.\n");
+				textArea.append("[ "+socket.getInetAddress()+" : "+socket.getPort()+" ] "+"Connect\n");
 				Receiver thread = new Receiver(socket);
 				thread.start();			
 			}
@@ -152,8 +152,8 @@ public class chatServer implements ActionListener{
 			try {
 				id = input.readUTF();
 
-				send(id+" 님이 입장 하셨습니다.");
-				textArea.append("현재 서버 접속자의 수는 "+(clients.size()+1) +"명 입니다.\n");
+				send(id+" Connect");
+				textArea.append("Connection Number : "+(clients.size()+1) +"\n");
 				clients.put(id, output);
 
 				while(input != null) {
@@ -163,11 +163,11 @@ public class chatServer implements ActionListener{
 			} catch (Exception e) {
 
 			}finally {
-				send(id +" 님이 퇴장하셨습니다.");
+				send(id +" disconnect");
 
 				clients.remove(id);
-				textArea.append("[ "+socket.getInetAddress()+" : "+socket.getPort()+" ] "+"에서 접속을 종료하였습니다.\n");
-				textArea.append("현재 서버 접속자의 수는 "+clients.size() +"명 입니다.\n");
+				textArea.append("[ "+socket.getInetAddress()+" : "+socket.getPort()+" ] "+"disconnect\n");
+				textArea.append("Connection Number : "+clients.size() +"\n");
 
 			}
 		}

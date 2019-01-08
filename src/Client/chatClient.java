@@ -37,14 +37,14 @@ public class chatClient implements ActionListener{
 		this.id = id;
 		frame = new Frame("Client");
 		panel = new Panel();
-		label = new Label("¸Þ½ÃÁö");
-		btnSend = new Button("º¸³»±â");
+		label = new Label("Client");
+		btnSend = new Button("send");
 		textField = new TextField();
 
 		idPanel = new Panel();
-		idLabel = new Label("´Ð³×ÀÓ");
+		idLabel = new Label("name");
 		idTextField = new TextField();
-		btnConnect = new Button("¿¬°á");
+		btnConnect = new Button("connect");
 
 		textArea = new TextArea(15,40);
 
@@ -103,7 +103,7 @@ public class chatClient implements ActionListener{
 				try {
 					String ip = "127.0.0.1";
 					socket = new Socket(ip, PORT);
-					System.out.println("¼­¹ö¿¡ ¿¬°áµÇ¾ú½À´Ï´Ù.");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 
 					sender = new Sender(socket);
 
@@ -111,7 +111,7 @@ public class chatClient implements ActionListener{
 					receiver.start();
 				} catch (Exception e2) {
 					e2.printStackTrace();
-					System.out.println("¼­¹ö¿¡ ¿¬°áÀÌ µÇÁö ¾Ê½À´Ï´Ù.");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
 					System.exit(0);
 				} 
 
